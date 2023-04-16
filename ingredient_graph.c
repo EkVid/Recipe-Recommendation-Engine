@@ -136,10 +136,6 @@ void load_ingredients(void)
   fclose(f);
 }
 
-/***************************************************************
- * The part of the assignment you need to implement starts below
- ***************************************************************/
-
 void print_ingredients(intNode *h)
 {
   /*
@@ -148,10 +144,6 @@ void print_ingredients(intNode *h)
    * whose head is 'h'.
    */
 
-  /*****
-   * TO Do:
-   * Complete this function
-   *****/
   intNode *p = NULL;
   if (h != NULL)
   {
@@ -182,10 +174,6 @@ int ingredient_index(char source_ingredient[MAX_STR_LEN])
    * array, the function returns -1
    */
 
-  /******
-   * TO Do:
-   * Implement this function
-   *****/
 
   for (int i = 0; i < MAT_SIZE; i++)
   {
@@ -202,27 +190,7 @@ void related_ingredients(char source_ingredient[MAX_STR_LEN])
   /*
    * This function prints out all the ingredients related
    * to the source ingredient.
-   *
-   * One per line, with no additional characters or symbols.
-   *
-   * Format of the adjacency matrix:
-   *
-   * AdjMat[i][j] = 0 if two ingredients i and j are not directly linked
-   *                (no edge in the graph between them, this means
-   *                 they never appeared together in one recipe)
-   * AdjMat[i][j] > 0 if two ingredients i and j are neighbours (they
-   * 			appeared together in at least a recipe). The
-   * 			actual value indicates how many times these two
-   * 			ingredients appeared together in a recipe
-   *
-   * Make sure you understand what this is telling you about the
-   * ingredients in your graph. You'll need it later
    */
-
-  /**********
-   * TO DO:
-   * Implement this function
-   * ********/
 
   int index = ingredient_index(source_ingredient);
   if (index != -1)
@@ -281,39 +249,7 @@ intNode *related_k_dist(intNode *h, char source_ingredient[MAX_STR_LEN], int k, 
    * neighbours' neighbours, and its neighbours' neighbours'
    * neighbours. And so on.
    *
-   * *****  This function MUST use recursion  ******
-   *
-   * Ingredients are returned as *indexes*, so, for instance,
-   * if we find a related ingredient 'chicken' is stored at
-   * index 7 in ingredients[][], then we store 7 in the
-   * linked list of related ingredients.
-   *
-   * The returned list MUST CONTAIN NO DUPLICATES.
-   *
-   * And be smart about it, or you'll end up in an infinite
-   * recursion! So think carefully about the base case(s)
-   * and about what the recursive case must do.
-   *
-   * Example call:
-   *
-   * Our test code may call your function in this way:
-   *
-   * intNode *head=NULL;
-   * head=related_k_dist(head,"rice",2,0);
-   *
-   * After that call, 'head' must point to a linked list with
-   * all the ingredients related to 'rice' up to a distance of
-   * 2 away.
-   *
-   * It's up to *you* to figure out what the 'dist' parameter
-   * is for!
-   *
    */
-
-  /*******
-   * TO DO:
-   * Complete this function
-   *******/
 
   if (dist == k)
   {
@@ -345,33 +281,8 @@ intNode *related_with_restrictions(char source_ingredient[MAX_STR_LEN], char avo
    * This function returns a linked list that contains the indexes of
    * all ingredients related to source_ingredient[] with a distance
    * of at most k_source.
-   *
-   * BUT, the list *must not contain* any ingredients related to avoid[]
-   * (including avoid[] itself) by a distance of up to k_avoid.
-   *
-   * Example:
-   *
-   * intNode *head=NULL;
-   * head=related_with_restrictions("rice", "nuts", 2, 0);
-   * (yes, we know the function doesn't take the head of a linked list as a parameter,
-   *  that's not a mistake)
-   *
-   * Should return a pointer to the head of a list of ingredients related to
-   * 'rice' by a distance of up to 2, NOT INCLUDING 'nuts'.
-   *
-   * intNode *head=NULL;
-   * head=related_with_restrictions("rice", "chicken", 2, 1);
-   *
-   * Should return a list of ingredients related to 'rice' by a distance
-   * of up to 2, NOT INCLUDING 'nuts' and any ingredients related
-   * to 'nuts' with a distance of up to 1.
-   *
    */
 
-  /****
-   * TO DO:
-   * Implement this function
-   *****/
   intNode *related_head = NULL;
   intNode *not_related_head = NULL;
   intNode *new_list = NULL;
@@ -474,34 +385,10 @@ ingre_node *related_k_ingre(ingre_node *head, char source_ingredient[MAX_STR_LEN
 void substitute_ingredient(char recipe[10][MAX_STR_LEN], char to_change[MAX_STR_LEN])
 {
   /*
-   * *CRUNCHY!*
-   *
-   * This function takes a recipe (which is an array of ingredients with up to 10
-   * ingredients), and replaces the one in 'to_change' by *the most compatible
-   * ingredient from the graph*
-   *
-   * By most compatible, we mean the ingredient that appears most often with
-   * the remaining ingredients in the recipe.
-   *
-   * The definition above may seem fuzzy, but it's not if you consider that the
-   * weights in the adjacency matrix are meaningful.
-   *
-   * As you see, nothing is returned - the result of this function is that the
-   * ingredient 'to_change' is replaced in the recipe by the most compatible
-   * ingredient given the graph that is *not already in the recipe*.
-   *
-   * Assume that the input recipe is such that *all ingredients are in the
-   * array of ingredients* (i.e. you don't have to worry about ingredients
-   * that don't exists).
-   *
-   * However, the recipe *may have less than 10 ingredients*, in which case
-   * unused ingredients will be set to empty strings ("")
+   * This function takes a recipe, and replaces the one in 'to_change' by the most compatible
+   * ingredient from the graph (By most compatible, it means the ingredient that appears most often with
+   * the remaining ingredients in the recipe)
    */
-
-  /*******
-   * TO DO:
-   * Complete this function!
-   ******/
 
   if (strlen(to_change) == 0)
   {
